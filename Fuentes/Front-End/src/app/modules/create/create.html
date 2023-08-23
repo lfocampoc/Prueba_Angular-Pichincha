@@ -1,0 +1,148 @@
+<section class="formulary">
+  <div class="banner-bank">
+    <img src="assets/img/logo-bank.png" alt="">
+  </div>
+
+  <div [formGroup]="formRegister" class="ban-form" *ngIf="formRegister">
+    <div class="card">
+      <div class="title-card">
+        <h1>{{ "page-create-title" | translate }}</h1>
+      </div>
+  
+      <div class="form-group">
+        <div>
+          <label for="">{{ "page-create-form-id-label" | translate }}</label>
+          <input
+            name="id"
+            id="id"
+            class="form-control"
+            formControlName="id"
+            type="text">
+          <div class="error-input" *ngIf="formRegister.controls['id'].invalid && formRegister.controls['id'].touched &&
+            (!formRegister.controls['id'].value || formRegister.controls['id'].value === '')">
+            ID no válido!
+          </div>
+
+          <div class="error-input" *ngIf="!validateControls('id', 3, 10) && formRegister.get('id').value !== ''">
+            La longitud debe estar entre 3 caracteres y 10
+          </div>
+        </div>
+        
+        <div>
+          <label for="">{{ "page-create-form-name-label" | translate }}</label>
+          <input
+            name="name"
+            id="name"
+            formControlName="name"
+            type="text">
+          <div class="error-input" *ngIf="formRegister.controls['name'].invalid && formRegister.controls['name'].touched &&
+          (!formRegister.controls['name'].value || formRegister.controls['name'].value === '')">
+            {{ "page-create-form-required" | translate }}
+          </div>
+
+          <div class="error-input" *ngIf="!validateControls('name', 5, 100)  && formRegister.get('name').value !== ''">
+            La longitud debe estar entre 5 caracteres y 100
+          </div>
+        </div>
+
+
+        <div>
+          <label for="">{{ "page-create-form-description-label" | translate }}</label>
+          <input
+            name="description"
+            id="description"
+            formControlName="description"
+            type="text">
+          <div class="error-input" *ngIf="formRegister.controls['description'].invalid && formRegister.controls['description'].touched &&
+          (!formRegister.controls['description'].value || formRegister.controls['description'].value === '')">
+            {{ "page-create-form-required" | translate }}
+          </div>
+
+          <div class="error-input" *ngIf="!validateControls('description', 10, 200) && formRegister.get('description').value !== ''">
+            La longitud debe estar entre 10 caracteres y 200
+          </div>
+        </div>
+        
+        <div>
+          <label for="">{{ "page-create-form-logo-label" | translate }}</label>
+          <input
+            name="logo"
+            id="logo"
+            formControlName="logo"
+            type="text">
+          <div class="error-input" *ngIf="formRegister.controls['logo'].invalid && formRegister.controls['logo'].touched &&
+          (!formRegister.controls['logo'].value || formRegister.controls['logo'].value === '')">
+            {{ "page-create-form-required" | translate }}
+          </div>
+        </div>
+
+        <div>
+          <label for="">{{ "page-create-form-date-release-label" | translate }}</label>
+          <input
+            name="date_release"
+            id="date_release"
+            placeholder="YYYY-MM-DD"
+            formControlName="date_release"
+            type="date"
+            >
+
+          <div class="error-input" *ngIf="formRegister.controls['date_release'].invalid && formRegister.controls['date_release'].touched &&
+            (!formRegister.controls['date_release'].value || formRegister.controls['date_release'].value === '')">
+              {{ "page-create-form-required" | translate }}
+            </div>
+
+
+          <div class="error-input" *ngIf="invalidDate">
+            La fecha de liberación no puede ser menor a hoy!
+            </div>
+        </div>
+        
+        <div>
+          <label>{{ "page-create-form-date-revision-label" | translate }}</label>
+          <input
+            name="date_revision"
+            id="date_revision"
+            placeholder="YYYY-MM-DD"
+            formControlName="date_revision"
+            type="text">
+        </div>
+      </div>
+
+      <div class="buttons-section">
+        <button (click)="resetForm()">Reiniciar</button>
+        <button
+          [disabled]="formRegister?.status !== 'VALID'"
+          (click)="params?.id ? updateRow() : createRow()"
+          class="btn-prymary">{{ "page-create-button-accept" | translate }}</button>
+      </div>
+
+        <app-alert
+          *ngIf="rowExist"
+          [class]="'alert-message'"
+          [message]="'El registro ya existe'"
+        ></app-alert>
+        
+      
+
+      
+        <app-alert
+          *ngIf="saveService"
+          [class]="'success-message'"
+          [message]="'Registro actualizado correctamente'"
+        ></app-alert>
+        
+      
+
+      <div class="error-message" *ngIf="errorService">
+        <app-alert
+          [class]="'error-message'"
+          [message]="'Ah ocurrido un error al intentar guardar'"
+        ></app-alert>
+        
+      </div>
+  
+    </div>
+    
+  </div>
+
+</section>

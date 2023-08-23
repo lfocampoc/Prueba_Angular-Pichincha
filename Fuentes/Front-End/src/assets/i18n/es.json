@@ -1,0 +1,11 @@
+{
+  "page-create-title": "Formulario de Registro",
+  "page-create-form-id-label": "ID",
+  "page-create-form-name-label": "Nombre",
+  "page-create-form-description-label": "Descripción",
+  "page-create-form-logo-label": "Logo",
+  "page-create-form-date-release-label": "Fecha Liberacion",
+  "page-create-form-date-revision-label": "Fecha Revisión",
+  "page-create-form-required": "Este campo es requerido!",
+  "page-create-button-accept": "Enviar"
+}

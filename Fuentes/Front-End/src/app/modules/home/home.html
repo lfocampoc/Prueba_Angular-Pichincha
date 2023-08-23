@@ -1,0 +1,46 @@
+<div class="banner-bank">
+  <img src="assets/img/logo-bank.png" alt="">
+</div>
+
+<section class="form-table">
+  <div class="buttons" [formGroup]="formHome">
+    <input
+      class="input-search"
+      placeholder="Ingrese su usuario"
+      formControlName="search"
+      (keyup)="onFilter($event)"
+      type="text">
+    <button
+      (click)="createRegistry()"
+      class="btn-prymary">Agregar</button>
+  </div>
+  <div class="table-estyle">
+    <table>
+      <tr>
+        <th>Logo</th>
+        <th>Nombre del producto</th>
+        <th>Descripcion</th>
+        <th>Fecha de liberacion</th>
+        <th>Fecha de reestructuracion</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let item of filteredList">
+        <td>
+          <img src="{{item.logo}}" alt="">
+        </td>
+        <td>{{item.name}}</td>
+        <td>{{item.description}}</td>
+        <td>{{ moment(item.date_release).format('YYYY-MM-DD') }}</td>
+        <td>{{ moment(item.date_revision).format('YYYY-MM-DD') }}</td>
+        <td>
+          <img src="assets/img/menu.png" (click)="createRegistry(item)" style="cursor: pointer;" alt="Editar">
+          <img src="assets/img/trash.png" (click)="createRegistry(item)" style="cursor: pointer;" alt="Eliminar">
+        </td>
+      </tr>
+    </table>
+    <p>{{ filteredList?.length }} Resultados</p>
+  </div>
+  
+</section>
+
+
